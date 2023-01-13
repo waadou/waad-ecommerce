@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>com.waadsoft</groupId>
+        <artifactId>waad-ecommerce</artifactId>
+        <version>1.0.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    
+    <artifactId>waad-ecommerce-web-parent</artifactId>
+    <packaging>pom</packaging>
+    <name>waad-ecommerce-web-parent</name>
+    <description>Common dependencies for backend and frontend modules.</description>
+    
+    <modules>
+        <module>waad-ecommerce-backend</module>
+        <module>waad-ecommerce-frontend</module>
+    </modules>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        
+        <!-- SECURITY DEPENDENCIES -->
+        <!--        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+              
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        -->
+
+        <!-- JPA/DATA ACCESS/VALIDATION DEPENDENCIES -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        
+        <!--
+        ~~ Spring Boot provides a configuration processor (an annotation 
+        ~~ processor) that generates metadata about classes in our application 
+        ~~ that are annotated with @ConfigurationProperties. This annotation 
+        ~~ processor use the generated metadata to create a JSON file named 
+        ~~ spring-configuration-metadata.json that IDEs can use to provide 
+        ~~ features like autocompletion and documentation support for the 
+        ~~ properties in the application.properties or application.yml.
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        
+        <!-- LOGGING DEPENDENCIES -->
+        <!-- Excluding the default Logback dependency -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+        <!-- Including Log4j2 dependency -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+        
+        <!-- TEST DEPENDENCIES -->
+        <!--
+        ~~ Spring Boot starter test dependency provides necessary support to 
+        ~~ perform testing Spring Boot application with popular testing 
+        ~~ libraries, such as JUnit, Mockito, Hamcrest. This dependency excludes
+        ~~ junit-vintage-engine dependency to leverage JUnit 5 features with
+        ~~ junit-jupiter-engine.
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <!--
+            ~~ Spring Boot Maven plugin is a Maven-plugin that provides useful  
+            ~~ goals to perform several application management activities.
+            ~~ For instance, we can quickly start the Spring Boot application
+            ~~ with this plugin using 'mvn spring-boot:run' command
+            -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

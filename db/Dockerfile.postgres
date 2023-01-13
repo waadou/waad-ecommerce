@@ -1,0 +1,14 @@
+FROM postgres:14
+
+LABEL image.version      = "1.0.0" 
+LABEL image.author.name  = "Alassani ABODJI" 
+LABEL image.author.email = "abodjialassani@gmail.com" 
+
+#COPY ./init-user-db.sh /docker-entrypoint-initdb.d/init-user-db.sh
+    
+ENV PGDATA=/var/lib/postgresql/data/pgdata \
+    POSTGRES_USER=ala2i \
+    POSTGRES_PASSWORD=ala2i \
+    POSTGRES_DB=waad_ecommerce
+
+EXPOSE 5432
