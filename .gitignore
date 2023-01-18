@@ -32,3 +32,5 @@ nb-configuration.xml
 
 ### VS Code ###
 .vscode/
+!**/src/main/**/node_modules
+waad-ecommerce-web-parent/**/node_modules
