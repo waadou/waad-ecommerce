@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+~~ The root element of a Log4j2 configuration file. The status attribute 
+~~ represents the level of internal log4j2 events. It is set to WARN in this
+~~ configuration.
+-->
+<Configuration status="WARN">
+    
+    <!-- 
+    ~~ Defines common placeholders that can be used in other places in the XML 
+    ~~ file. We’ve defined the LOG_PATTERN property here.
+    -->
+    <Properties>
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} [%5p] [%15.15t] %-40.40c{1.}:%4.4L - %m%n%ex
+        </Property>
+        
+        <!-- The file name for file appender -->
+        <Property name="FILE_NAME">logs/application-log4j2</Property>
+        
+        <!-- Rolls the current log file once its size reaches 10MB -->
+        <Property name="FILE_SIZE">1MB</Property>
+        
+        <!-- Rolls the current log file after 7 days -->
+        <Property name="ROLL_FILE_PERIOD">7</Property>
+        
+        <!-- Maximum 10 backup log files can be kept -->
+        <Property name="MAX_BACKUPS">10</Property>
+        
+        <!-- The name of the logger for file appender -->
+        <Property name="CONSOLE_APPENDER_LOGGER_NAME">org.springframework.boot</Property>
+        
+        <!-- The name of the logger for file appender -->
+        <Property name="FILE_APPENDER_LOGGER_NAME">com.waadsoft.ecommerce.backend</Property>
+    </Properties>
+        
+    <!--
+    ~~ LOGGER:
+    ~~ A logger is a logging framework component that is responsible for logging
+    ~~ the log message using one or more appenders.
+    ~~ We can define several loggers with various logging levels based on our
+    ~~ need.
+    ~~ 
+    ~~ APPENDER:
+    ~~ An appender in a logging framework primarily decides two(2) main things:
+    ~~ where the log messages should go and what should be the message format.
+    ~~ Appenders are responsible for delivering LogEvents to their destination.
+    ~~ Based on the destination of log message, there are several types of 
+    ~~ appenders. For example: console appender, file appender, rolling file 
+    ~~ appender, SMTP appender, ...
+    ~~ 
+    ~~ 
+    ~~ 
+    ~~ List of appenders 
+    ~~ 
+    -->
+    <Appenders>
+        
+        <!-- 
+        ~~ A console appender configuration that logs the log statements in 
+        ~~ console/terminal/command prompt.
+        -->
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">   
+            <PatternLayout pattern="${LOG_PATTERN}" />
+        </Console>
+        
+        <!-- 
+        ~~ A file appender configuration that logs the log statements in a file 
+        ~~ with a provided file name and pattern. It also provides additional 
+        ~~ configuration, such as how to manage the file over a period. 
+        ~~ 
+        ~~ In the following configuration, the log file will be created in logs
+        ~~ folder at the root of the project.
+        -->
+        <RollingFile name="FileAppender"                     
+                     fileName="${FILE_NAME}.log"
+                     filePattern="${FILE_NAME}-%d{yyyy-MM-dd}-%i.log">  
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            
+            <Policies>
+                <!-- Rolls the current log file once its size reaches 10 MB -->
+                <SizeBasedTriggeringPolicy size="${FILE_SIZE}" />   
+                
+                <!-- Rolls the current log file after 7 days -->
+                <TimeBasedTriggeringPolicy interval="${ROLL_FILE_PERIOD}" />   
+            </Policies>
+            
+            <!-- Maximum 10 backup log files can be kept -->
+            <DefaultRolloverStrategy max="${MAX_BACKUPS}"/>   
+        </RollingFile>
+    </Appenders>
+    
+    <!-- 
+    ~~ The list of loggers that logs the log statements using the provided 
+    ~~ appenders.
+    -->
+    <Loggers>  
+        <!-- 
+        ~~ A logger that runs in DEBUG logging level. It uses the underlying 
+        ~~ file appender to log all log events generated from  
+        ~~ com.waadsoft.coursetracker and its subpackages.
+        -->
+        <Logger name="${FILE_APPENDER_LOGGER_NAME}" level="debug" additivity="false">
+            <AppenderRef ref="FileAppender"/>
+        </Logger> 
+              
+        <!--
+        ~~ A logger that runs in INFO logging level and logs events from 
+        ~~ org.springframeworg.boot and its subpackages
+        -->                                                   
+        <Logger name="${CONSOLE_APPENDER_LOGGER_NAME}" level="info" additivity="false">                             
+            <AppenderRef ref="ConsoleAppender"/>
+        </Logger>
+        
+        <!-- Root logger runs in INFO logging level -->
+        <Root level="info">      
+            <AppenderRef ref="FileAppender"/>
+            <AppenderRef ref="ConsoleAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

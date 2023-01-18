@@ -22,12 +22,12 @@
 @REM ----------------------------------------------------------------------------
 @echo off
 
-@REM Create a variable that contains the name of the volume for MongoDb data
-set VOLUME_NAME=waad-ecommerce-volume
+@REM Create a variable that contains the directory for PostgreSQL data from the host side
+set DB_DATA_DIR=C:/waad-apps/docker/db/waad-ecommerce
 
-@REM Create a variable that contains the name of the directory that contains 
-@REM Mongo DB data on the container
-set MONGO_DATA_DIR=/data/db
+@REM Create a variable that contains the directory for PostgreSQL data from the guest 
+@REM side(Container). This should map to the corresponding directory from the host side.
+set CONTAINER_DB_DATA_DIR=/var/lib/postgresql/data
 
 @REM Create a variable that contains the name of the Docker container to build
 set CONTAINER_NAME=waad-ecommerce-postgres
@@ -39,7 +39,7 @@ set IMAGE_NAME=alassani/%CONTAINER_NAME%
 set DOCKERFILE=db/Dockerfile.postgres
 
 @REM Create a variable that contains the port used on the host side
-set HOST_PORT=5433
+set HOST_PORT=5434
 
 @REM Create a variable that contains the port used on the container side
 set CONTAINER_PORT=5432
@@ -54,15 +54,15 @@ set CONTAINER_PORT=5432
 @REM 
 @REM So let's filter the list of all volumes based on their names, and only
 @REM returning their names.
-FOR /F %%V IN ('docker volume ls -qf "name=%VOLUME_NAME%"') DO (
-    set REMOVEABLE_VOLUME=%%V
-
-    IF "%REMOVEABLE_VOLUME%" == "" (
-        docker volume create %VOLUME_NAME%
-    ) ELSE (
-        echo Docker volume with the name %VOLUME_NAME% exists already!
-    )
-)
+@REM FOR /F %%V IN ('docker volume ls -qf "name=%VOLUME_NAME%"') DO (
+@REM     set REMOVEABLE_VOLUME=%%V
+@REM 
+@REM     IF "%REMOVEABLE_VOLUME%" == "" (
+@REM         docker volume create %VOLUME_NAME%
+@REM     ) ELSE (
+@REM         echo Docker volume with the name %VOLUME_NAME% exists already!
+@REM     )
+@REM )
 
 
 @REM The Docker container will only be deleted if it does exist.
@@ -98,6 +98,6 @@ FOR /F %%A IN ('docker image ls -qf "reference=%IMAGE_NAME%"') DO (
 docker build --tag=%IMAGE_NAME% --file=%DOCKERFILE% .
 
 @REM Time to run the container based on the updated Docker image.
-docker run -d -it -p %HOST_PORT%:%CONTAINER_PORT% -v %VOLUME_NAME%:%MONGO_DATA_DIR% --name=%CONTAINER_NAME% %IMAGE_NAME%
+docker run -d -it -p %HOST_PORT%:%CONTAINER_PORT% -v %DB_DATA_DIR%:%CONTAINER_DB_DATA_DIR% --name=%CONTAINER_NAME% %IMAGE_NAME%
 
 echo Your container:%CONTAINER_NAME% is now up and running in background
