@@ -1,17 +1,18 @@
 package com.waadsoft.ecommerce.backend.user;
 
-import com.waadsoft.ecommerce.common.entities.Role;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
+import static java.util.stream.Collectors.toList;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.Rollback;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 
-import static java.util.stream.Collectors.toList;
+import com.waadsoft.ecommerce.common.entities.Role;
 
 /**
  *
@@ -19,15 +20,15 @@ import static java.util.stream.Collectors.toList;
  */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Rollback(false) // Tell Spring Boot not to rollback after test(persist data definitely)
+@Rollback(true) // Set Rollback to false tell Spring Boot persist data definitely into the data store, otherwise it will rollback after the test. The default value is true.
 class RoleRepositoryTest {
 
     @Autowired
     private RoleRepository roleRepository;
 
-    //@Test
+    @Test
     public void givenCreateRoleWhenLoadTheRoleThenExpectSameRole() {
-        Role role = new Role("Admin", "Manage everything");
+        Role role = Role.of("Admin", "Manage everything");
         Role savedRole = roleRepository.save(role);
 
         assertThat(savedRole.getId()).isGreaterThan(0);
@@ -35,13 +36,9 @@ class RoleRepositoryTest {
         assertThat(roleRepository.findByName(role.getName()).get()).isEqualTo(role);
     }
 
-    //@Test
-    public void givenCreateCollectionOfRolesWhenLoadRolesThenExpectSameSize() {
-        List<Role> roles = new ArrayList<>();
-        roles.add(new Role("SalesPerson", "Manage product prices, customers, shipping, orders and sales report"));
-        roles.add(new Role("Editor", "Manage product categories, brands, products, articles and menus"));
-        roles.add(new Role("Shipper", "View products, view orders and update order status"));
-        roles.add(new Role("Assistant", "Manage questions and reviews"));
+    @Test
+    public void givenCreateRoleWhenLoadTheRolesThenExpectSameSize() {
+        List<Role> roles = createRoles();
 
         Iterable<Role> savedRoles = roleRepository.saveAll(roles);
         assertThat(size(roles)).isEqualTo(size(savedRoles));
@@ -51,7 +48,17 @@ class RoleRepositoryTest {
         assertThat(roles.size()).isEqualTo(foundRoles.size());
     }
 
-    public static int size(Iterable data) {
+    private List<Role> createRoles() {
+        List<Role> roles = new ArrayList<>();
+        roles.add(Role.of("SalesPerson", "Manage product prices, customers, shipping, orders and sales report"));
+        roles.add(Role.of("Editor", "Manage product categories, brands, products, articles and menus"));
+        roles.add(Role.of("Shipper", "View products, view orders and update order status"));
+        roles.add(Role.of("Assistant", "Manage questions and reviews"));
+
+        return roles;
+    }
+
+    private static int size(Iterable data) {
 
         if (data instanceof Collection) {
             return ((Collection<?>) data).size();

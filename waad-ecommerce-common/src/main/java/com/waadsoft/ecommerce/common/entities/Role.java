@@ -45,9 +45,16 @@ public class Role extends BaseEntity<Long> implements Comparable<Role> {
     protected Role() {
     }
 
-    public Role(String name, String description) {
+    private Role(String name, String description) {
         this.name = requireNonNull(name, "Role name not specified!");
         this.description = requireNonNull(description, "Role description not specified!");;
+    }
+
+    /*---------------------------------------------------------
+    |         F A C T O R Y      M E T H O D S                |
+    ==========================================================*/
+    public static Role of(String name, String description) {
+        return new Role(name, description);
     }
 
     /*---------------------------------------------------------

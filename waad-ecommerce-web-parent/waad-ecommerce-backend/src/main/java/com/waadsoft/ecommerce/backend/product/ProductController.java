@@ -1,20 +1,27 @@
-package com.waadsoft.ecommerce.backend.user;
+package com.waadsoft.ecommerce.backend.product;
 
-import java.util.List;
-
-import com.waadsoft.ecommerce.common.entities.User;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
  * @author Alassani ABODJI <abodjialassani[at]gmail.com>
  */
-public interface UserService {
+@Controller
+@RequestMapping("/products")
+public class ProductController {
 
-    void delete(User user);
+    @GetMapping
+    public String list() {
+        return "products/product-list";
+    }
 
-    List<User> getAll();
+    @GetMapping("/edit")
+    public String edit() {
+        return "products/product-edit";
+    }
 
-    void save(User user);
 }
 
 /*=============================================================================

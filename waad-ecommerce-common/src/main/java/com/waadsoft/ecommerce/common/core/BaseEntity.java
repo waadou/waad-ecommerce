@@ -9,7 +9,8 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
- *
+ * @param <ID> The type of the identifier of the entity(e.g.: String, Integer,
+ * Long, ...)
  * @author Alassani ABODJI <abodjialassani[at]gmail.com>
  */
 @MappedSuperclass

@@ -19,6 +19,11 @@ public class HomeController {
         
         return "index";
     }
+
+    @GetMapping("/terms-conditions")
+    public String termsConditions() {
+        return "legislation/terms-conditions";
+    }
 }
 
 /*=============================================================================

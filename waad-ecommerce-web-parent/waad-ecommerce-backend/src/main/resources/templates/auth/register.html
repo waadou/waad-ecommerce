@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<!--
+Copyright 2023 Waad Soft<https://www.waadsoft.com>.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html
+	lang="fr"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--
+        <link
+                rel="apple-touch-icon"
+                sizes="180x180"
+                href="/apple-touch-icon.png"
+        />
+        <link
+                rel="icon"
+                type="image/png"
+                sizes="32x32"
+                href="/favicon-32x32.png"
+        />
+        <link
+                rel="icon"
+                type="image/png"
+                sizes="16x16"
+                href="/favicon-16x16.png"
+        />
+        -->
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0ed3cf" />
+		<meta name="msapplication-TileColor" content="#0ed3cf" />
+		<meta name="theme-color" content="#0ed3cf" />
+
+		<meta
+			property="og:image"
+			content="http://tailwindcomponents.com/storage/7260/conversions/temp10526-ogimage.jpg?v=2023-01-17 18:07:50"
+		/>
+		<meta property="og:image:width" content="1280" />
+		<meta property="og:image:height" content="640" />
+		<meta property="og:image:type" content="image/png" />
+
+		<meta
+			property="og:url"
+			content="https://tailwindcomponents.com/component/tailwind-css-admin-dashboard-layout/landing"
+		/>
+		<meta
+			property="og:title"
+			content="Tailwind CSS admin dashboard layout by zoltanszogyenyi"
+		/>
+		<meta
+			property="og:description"
+			content="Use this dashboard layout to quickly prototype and build an administration panel using charts for your website"
+		/>
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@TwComponents" />
+		<meta
+			name="twitter:title"
+			content="Tailwind CSS admin dashboard layout by zoltanszogyenyi"
+		/>
+		<meta
+			name="twitter:description"
+			content="Use this dashboard layout to quickly prototype and build an administration panel using charts for your website"
+		/>
+		<meta
+			name="twitter:image"
+			content="http://tailwindcomponents.com/storage/7260/conversions/temp10526-ogimage.jpg?v=2023-01-17 18:07:50"
+		/>
+
+		<title>Tailwind CSS admin dashboard layout by zoltanszogyenyi.</title>
+
+		<link rel="stylesheet" th:href="@{css/style.css}" />
+	</head>
+	<body class="bg-gray-50">
+		<!-- The wrapper for all the content on the page -->
+		<div class="waad-wrapper">
+			<main class="bg-gray-50">
+				<div
+					class="flex flex-col mx-auto pt-8 px-6 justify-center items-center md:h-screen"
+				>
+					<a
+						th:href="@{/}"
+						class="flex justify-center items-center font-semibold text-2xl mb-8 lg:mb-10"
+					>
+						<img
+							th:src="@{img/logo.svg}"
+							class="h-10 mr-4"
+							alt="Windster Logo"
+						/>
+						<span
+							class="font-bold whitespace-nowrap text-2xl uppercase"
+							>Waad
+							<span class="text-cyan-600">Ecommerce</span></span
+						>
+					</a>
+
+					<div
+						class="w-full items-center justify-center rounded-lg bg-white shadow md:mt-0 lg:flex xl:p-0 lg:max-w-screen-lg"
+					>
+						<div class="h-full hidden w-4/6 lg:flex">
+							<img
+								class="rounded-l-lg"
+								th:src="@{img/create-account.jpg}"
+								alt="login image"
+							/>
+						</div>
+
+						<div class="w-full p-6 sm:p-8 lg:p-16 lg:py-0">
+							<h2
+								class="mt-8 text-2xl lg:text-3xl font-bold text-gray-900"
+							>
+								Create a Free Account
+							</h2>
+
+							<form class="mt-8" action="#">
+								<div>
+									<label
+										for="email"
+										class="block mb-2 text-medium text-sm text-gray-900"
+										>Your email</label
+									>
+									<input
+										type="email"
+										name="email"
+										id="email"
+										class="block w-full rounded-md border border-gray-300 bg-gray-50 sm:text-sm text-gray-900 p-2.5 focus:border-cyan-600 focus:ring-cyan-600"
+										placeholder="name@company.com"
+										required
+									/>
+								</div>
+
+								<div class="mt-6">
+									<label
+										for="password"
+										class="block mb-2 text-medium text-sm text-gray-900"
+										>New password</label
+									>
+									<input
+										type="password"
+										name="password"
+										id="password"
+										placeholder="••••••••"
+										class="block w-full rounded-md border border-gray-300 bg-gray-50 sm:text-sm text-gray-900 p-2.5 focus:border-cyan-600 focus:ring-cyan-600"
+										required
+									/>
+								</div>
+
+								<div class="mt-6">
+									<label
+										for="confirm-password"
+										class="block mb-2 text-medium text-sm text-gray-900"
+										>Confirm New password</label
+									>
+									<input
+										type="password"
+										name="confirm-password"
+										id="confirm-password"
+										placeholder="••••••••"
+										class="block w-full rounded-md border border-gray-300 bg-gray-50 sm:text-sm text-gray-900 p-2.5 focus:border-cyan-600 focus:ring-cyan-600"
+										required
+									/>
+								</div>
+
+								<div class="flex items-start mt-6">
+									<div class="flex h-5 items-center">
+										<input
+											id="terms"
+											aria-describedby="terms"
+											name="terms"
+											type="checkbox"
+											class="h-4 w-4 focus:ring-3 focus:ring-cyan-200 rounded border-gray-300 bg-gray-50 text-cyan-600"
+											required=""
+										/>
+									</div>
+									<div class="ml-3 text-sm">
+										<label
+											for="terms"
+											class="font-medium text-gray-900"
+											>I accept the
+											<span class="ml-1"
+												><a
+													th:href="@{/terms-conditions}"
+													class="text-sm font-medium text-cyan-500 hover:underline"
+													>Terms and Conditions</a
+												></span
+											>
+										</label>
+									</div>
+								</div>
+
+								<button
+									type="submit"
+									class="inline-flex w-full rounded-md mt-6 px-5 py-3 text-center text-base text-white sm:w-auto bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-4 focus:ring-cyan-200"
+								>
+									<svg
+										class="w-6 h-6 mr-1 -ml-1 YIUegm7fh_CpJbivTu6B"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+											clip-rule="evenodd"
+										></path>
+									</svg>
+									Create account
+								</button>
+
+								<div class="mt-6 text-sm font-medium">
+									Already have an account?
+									<a
+										th:href="@{/login}"
+										class="text-cyan-500 hover:underline"
+										>Login here</a
+									>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</main>
+
+			<!--<script async defer th:src="@{js/buttons.js}"></script>-->
+			<!--<script th:src="@{js/app.bundle.js}"></script>-->
+			<!-- <script src="js/script.js"></script> -->
+		</div>
+	</body>
+</html>

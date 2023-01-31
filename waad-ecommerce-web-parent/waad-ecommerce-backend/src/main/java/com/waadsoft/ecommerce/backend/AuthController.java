@@ -1,20 +1,44 @@
-package com.waadsoft.ecommerce.backend.user;
+package com.waadsoft.ecommerce.backend;
 
-import java.util.List;
-
-import com.waadsoft.ecommerce.common.entities.User;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
  * @author Alassani ABODJI <abodjialassani[at]gmail.com>
  */
-public interface UserService {
+@Controller
+public class AuthController {
 
-    void delete(User user);
+    @GetMapping("/login")
+    public String login() {
+        return "auth/login";
+    }
 
-    List<User> getAll();
+    @GetMapping("/register")
+    public String register() {
+        return "auth/register";
+    }
 
-    void save(User user);
+    @GetMapping("/forgot-password")
+    public String forgotPassword() {
+        return "auth/forgotpassword";
+    }
+
+    @GetMapping("/reset-password")
+    public String resetPassword() {
+        return "auth/resetpassword";
+    }
+
+    @GetMapping("/404")
+    public String error404() {
+        return "error/404";
+    }
+
+    @GetMapping("/500")
+    public String error500() {
+        return "error/500";
+    }
 }
 
 /*=============================================================================

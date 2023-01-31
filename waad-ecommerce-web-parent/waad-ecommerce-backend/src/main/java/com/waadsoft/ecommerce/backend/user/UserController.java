@@ -2,19 +2,38 @@ package com.waadsoft.ecommerce.backend.user;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.waadsoft.ecommerce.common.entities.User;
 
 /**
  *
  * @author Alassani ABODJI <abodjialassani[at]gmail.com>
  */
-public interface UserService {
+@Controller
+@RequestMapping("/users")
+public class UserController {
 
-    void delete(User user);
+    @Autowired
+    private UserService userService;
 
-    List<User> getAll();
+    @GetMapping
+    public String getAllUsers(Model model) {
+        List<User> users = userService.getAll();
+        model.addAttribute("users", users);
 
-    void save(User user);
+        return "users/user-list";
+    }
+    
+    
+    @GetMapping("/edit")
+    public String edit() {
+        return "users/user-edit";
+    }
 }
 
 /*=============================================================================

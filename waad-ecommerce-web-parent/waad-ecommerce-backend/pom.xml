@@ -15,7 +15,7 @@
     <name>waad-ecommerce-backend</name>
     
     <properties>
-        <exec.mainClass>com.waadsoft.ecommerce.backend.WaadEcommerceBackend</exec.mainClass>
+        <exec.mainClass>com.waadsoft.ecommerce.backend.WaadEcommerceBackendApplication</exec.mainClass>
     </properties>
     
     <dependencies>

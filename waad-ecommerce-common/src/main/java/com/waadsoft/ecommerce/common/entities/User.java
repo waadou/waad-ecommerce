@@ -129,6 +129,10 @@ public class User extends BaseEntity<Long> implements Comparable<User> {
         this.lastname = lastname;
     }
 
+    public String getFullName() {
+        return String.format("%s %s", firstname, lastname);
+    }
+
     public String getEmail() {
         return email;
     }
@@ -300,18 +304,74 @@ public class User extends BaseEntity<Long> implements Comparable<User> {
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        final User other = (User) obj;
-        return Objects.equals(this.email, other.email);
+        return this.email.equals(((User) obj).email);
     }
 
     @Override
     public String toString() {
-        return "User{" + "firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", password=" + password + ", status=" + status + '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getName()).append("{");
+        sb.append("Firstname=").append(firstname).append(", ");
+        sb.append("Lastname=").append(lastname).append(", ");
+        sb.append("Email=").append(email).append(", ");
+        sb.append("Photo=").append(photo).append(", ");
+        sb.append("Password=[PROTECTED], ");
+        sb.append("Status=").append(status).append(", ");
+        sb.append("Roles=").append(roles).append('}');
+        return sb.toString();
     }
 
     /*---------------------------------------------------------
     |          B   U   I   L   D   E   R                      |
     ==========================================================*/
+    public static Builder firstname(String firstname) {
+        return builder().firstname(firstname);
+    }
+
+    public static Builder lastname(String lastname) {
+        return builder().lastname(lastname);
+    }
+
+    public static Builder email(String email) {
+        return builder().email(email);
+    }
+
+    public static Builder photo(String photo) {
+        return builder().photo(photo);
+    }
+
+    public static Builder password(String password) {
+        return builder().password(password);
+    }
+
+    public static Builder status(UserStatus status) {
+        return builder().status(status);
+    }
+
+    public static Builder role(UserRole role) {
+        return builder().role(role);
+    }
+
+    public static Builder role(Role role) {
+        return builder().role(role);
+
+    }
+
+    public static Builder roles(Iterable<@NotNull Role> roles) {
+        return builder().roles(roles);
+
+    }
+
+    public static Builder roles(Collection<@NotNull UserRole> roles) {
+        return builder().roles(roles);
+
+    }
+
+    public static Builder roles(Role... roles) {
+        return builder().roles(roles);
+
+    }
+
     public static class Builder {
 
         private final User user;

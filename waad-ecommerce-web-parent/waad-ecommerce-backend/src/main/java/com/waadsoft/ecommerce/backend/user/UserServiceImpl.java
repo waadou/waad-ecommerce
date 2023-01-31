@@ -1,10 +1,40 @@
 package com.waadsoft.ecommerce.backend.user;
 
+import java.util.List;
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.waadsoft.ecommerce.common.entities.User;
+
 /**
  *
  * @author Alassani ABODJI <abodjialassani[at]gmail.com>
  */
+@Service
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Override
+    public List<User> getAll() {
+        List<User> users = new ArrayList<>();
+        userRepository.findAll().forEach(users::add);
+
+        return users;
+    }
+
+    @Override
+    public void save(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public void delete(User user) {
+        userRepository.delete(user);
+    }
 
 }
 

@@ -1,14 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: ["../resources/templates/**/*.{html,js}"], // it will be explained later
+	content: [
+		"../resources/templates/**/*.{html,js}",
+		"./node_modules/flowbite/**/*.js",
+	],
 	theme: {
 		extend: {
 			colors: {
-				brand: "3fbaeb",
-				dark: "0c87b8",
-				DEFAULT: "0fa9e6",
+				"form-control": "rgb(249,250,251)",
 			},
 		},
 	},
-	plugins: [],
+	plugins: [require("@tailwindcss/forms"), require("flowbite/plugin")],
 };

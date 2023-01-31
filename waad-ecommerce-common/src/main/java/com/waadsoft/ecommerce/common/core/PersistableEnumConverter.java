@@ -3,11 +3,11 @@ package com.waadsoft.ecommerce.common.core;
 import java.io.Serializable;
 import java.util.stream.Stream;
 import static java.util.Objects.isNull;
-import static java.util.Objects.requireNonNull;
 import javax.persistence.AttributeConverter;
+import static java.util.Objects.requireNonNull;
 
 /**
- * Generic enum converter for JPA.
+ * Generic JPA converter for enum types that implement {@link PersistableEnum}.
  *
  * @author Alassani ABODJI <abodjialassani[at]gmail.com>
  *
