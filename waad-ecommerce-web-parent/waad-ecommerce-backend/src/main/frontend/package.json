@@ -2,11 +2,21 @@
 	"name": "frontend",
 	"private": true,
 	"scripts": {
-		"build": "tailwindcss -i ./main.css -o ../resources/static/css/style.css --watch"
+		"build": "webpack serve",
+		"build222": "tailwindcss -i ./main.css -o ../resources/static/css/style.css --watch"
 	},
 	"devDependencies": {
 		"@tailwindcss/forms": "^0.5.3",
-		"tailwindcss": "^3.2.4"
+		"autoprefixer": "^10.4.13",
+		"css-loader": "^6.7.3",
+		"postcss": "^8.4.21",
+		"postcss-loader": "^7.0.2",
+		"postcss-preset-env": "^8.0.1",
+		"style-loader": "^3.3.1",
+		"tailwindcss": "^3.2.4",
+		"webpack": "^5.75.0",
+		"webpack-cli": "^5.0.1",
+		"webpack-dev-server": "^4.11.1"
 	},
 	"dependencies": {
 		"flowbite": "^1.6.3"
